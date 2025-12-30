@@ -1,9 +1,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-// Centralized error handler
 const errorHandler = (err, req, res, next) => {
-  console.error(err.stack);
+  console.error(err?.stack ?? err);
   const status = err.status || 500;
   const payload = {
     message: "An unexpected error occurred!",

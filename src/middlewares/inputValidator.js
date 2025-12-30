@@ -1,12 +1,12 @@
 import Joi from "joi";
 
-const useScheme = Joi.object({
+const useSchema = Joi.object({
   name: Joi.string().min(3).required(),
   email: Joi.string().email().required(),
 });
 
 export const validateUser = (req, res, next) => {
-  const { error } = useScheme.validate(req.body);
+  const { error } = useSchema.validate(req.body);
   if (error)
     return res.status(400).json({
       status: 400,
@@ -15,19 +15,20 @@ export const validateUser = (req, res, next) => {
   next();
 };
 
-const updateUserScheme = Joi.object({
+const updateUserSchema = Joi.object({
   name: Joi.string().min(3),
   email: Joi.string().email(),
 }).min(1);
 
-export const validateUpdadeUser = (req, res, next) => {
-  const { error } = updateUserScheme.validate(req.body);
+export const validateUpdateUser = (req, res, next) => {
+  const { error } = updateUserSchema.validate(req.body);
   if (error) {
     return res.status(400).json({
       status: 400,
       message: error.details[0].message,
     });
   }
+  next();
 };
 
-export default { validateUser, validateUpdadeUser };
+export default { validateUser, validateUpdateUser };

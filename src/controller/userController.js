@@ -6,7 +6,6 @@ import {
   deleteUserService,
 } from "../models/userModel.js";
 
-// Standardized response function
 const handleResponse = (res, statusCode, message, data = null) => {
   res.status(statusCode).json({
     statusCode,
